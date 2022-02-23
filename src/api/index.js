@@ -6,3 +6,18 @@ export function getRoutes() {
     method: "get",
   });
 }
+
+export function getUserList(params) {
+  return request({
+    url: "/user",
+    method: "get",
+    params,
+  });
+}
+
+export function getUserDetail(id) {
+  return request({
+    url: `/user/${id}`,
+    method: "get",
+  });
+}

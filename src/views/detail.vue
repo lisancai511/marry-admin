@@ -3,19 +3,26 @@
     <div class="logo">
 
     </div>
+    <van-image-preview v-model="show"
+                       :images="images"
+                       @change="onChange">
+    </van-image-preview>
     <div class="photo">
       <van-image class="headImg one"
                  width="120"
                  height="120"
-                 :src="userInfo.headimgurl" />
-      <van-image class="headImg"
-                 width="80"
-                 height="80"
+                 @click="setImgUrl(userInfo.upper)"
                  :src="userInfo.upper" />
       <van-image class="headImg"
                  width="80"
                  height="80"
+                 @click="setImgUrl(userInfo.body)"
                  :src="userInfo.body" />
+      <van-image class="headImg"
+                 width="80"
+                 height="80"
+                 @click="setImgUrl(userInfo.headimgurl)"
+                 :src="userInfo.headimgurl" />
     </div>
     <div class="title">
       <div class="left">
@@ -26,7 +33,13 @@
           <van-tag color="#ffb8c4">{{userInfo.age}}岁</van-tag>
         </div>
       </div>
-      <div class="right"></div>
+      <div class="right">
+        <van-button class="right_btn"
+                    color="linear-gradient(90deg, #A977F2, #8170F2)"
+                    type="primary"
+                    size="mini"
+                    round><span class="m-r-10">❤</span> 关注她</van-button>
+      </div>
     </div>
     <div class="main_wrap">
       <div class="wrap">
@@ -74,7 +87,7 @@
     <div class="zhanwei"></div>
     <div class="footer">
       <van-button class="btn"
-                  color="linear-gradient(0deg, #271a80, #3542b1)"
+                  color="linear-gradient(0deg, #8170F2, #A977F2)"
                   type="primary"
                   round
                   size="large">获取微信</van-button>
@@ -82,81 +95,35 @@
   </div>
 </template>
 <script>
+import { getUserDetail } from '@/api/index'
 export default {
   name: 'home',
   data() {
     return {
-      userInfo: {
-        id: 211156,
-        unionid: '',
-        nickname: '',
-        sex: '女',
-        language: '',
-        area: '管城回族区',
-        city: '郑州市',
-        province: '河南省',
-        country: '',
-        headimgurl:
-          'https://thirdwx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTLpSwG8Qg23TbKz9f66EQhH3lI6sze5T9IAZbRL67OicPnMo1pGkT9jdibs9IjOE3Y7ENSujKaXPS0g/132',
-        upper:
-          'http://oss.yijiehunlian.com/upload_zz/uploads/base/upper_oVyGO6sl9DktOjUisMbWVr51F3U0.jpg?x-oss-process=image/resize,m_fill,h_200,w_200',
-        body: 'http://oss.yijiehunlian.com/upload_zz/uploads/base/body_oVyGO6sl9DktOjUisMbWVr51F3U0.jpg?x-oss-process=image/resize,m_fill,h_200,w_200',
-        monologue: '',
-        avatar:
-          'http://oss.yijiehunlian.com/upload_zz/uploads/base/avatar_oVyGO6sl9DktOjUisMbWVr51F3U0.jpg?x-oss-process=image/resize,m_fill,h_200,w_200',
-        complaint_num: null,
-        deleted: 0,
-        recommend: 1,
-        subscribe: 0,
-        want_child: null,
-        profession: '电商',
-        house: '有房-有车',
-        car: null,
-        born_province: '',
-        born_city: '',
-        born_area: '',
-        weight: '50kg',
-        bodily: null,
-        smoke: '不抽烟不喝酒',
-        drink: null,
-        constellation: null,
-        nation: '汉族',
-        marry_date: '一年内结婚',
-        create_time: 1641184823,
-        update_time: null,
-        rec_time: 1645403769,
-        birthday: '1988-04-19',
-        work_data: '河南省,郑州市,管城回族区',
-        height: '165cm',
-        income: '5K-8K',
-        education: '大专',
-        marriage: '未婚',
-        have_child: null,
-        born_data: '河南省,郑州市,中牟县',
-        age: 33,
-        tousu: 0,
-        realname: '孟金萍',
-        mobile: null,
-        uname: null,
-        vip_start: null,
-        vip_end: null,
-        vip: null,
-        maxcouple_age: 37,
-        mincouple_age: 34,
-        couple_marriage: '未婚',
-        status: '1',
-        show_counts: 2,
-        action_conuts: 13,
-        external_get: 16,
-        today_getwx: 0,
-        all_getwx: 0,
-      },
+      show: false,
+      userInfo: {},
+      images: [],
       content:
         '本人非颜控，不是外貌协会，偏爱年纪大点会照顾人的大叔型。我爱运动爱旅游爱美食，稀饭舒适的家居，希望遇到一个三观合，阅历丰富的你，带我一起游览这个世界的美好，不问过往，只争未来！ 自我感觉太好觉得家里有王位要继承的请绕道；妈宝男凤凰男请绕道；小肚鸡肠斤斤计较的请绕道；生活习惯不好不会自洁的（比如家里乱七八糟不会整理不爱干净的，本人轻微洁癖）请绕道；爱运动坚持健身的加分；喜欢摄影会做饭好吃的加分；会滑雪潜水等户外活动的加分；有爱心喜欢小动物的加分；唱歌好听的也可以加点分，其他想到加分减分的聊到再补充。',
     }
   },
-  mounted() {},
-  methods: {},
+  mounted() {
+    this.getData()
+  },
+  methods: {
+    async getData() {
+      let res = await getUserDetail(this.$route.query.id)
+      this.userInfo = res.data.data
+    },
+    onChange() {
+      console.log(123)
+    },
+    setImgUrl(val) {
+      let str = val.replace(/200/g, '2000')
+      this.images = [str]
+      this.show = true
+    },
+  },
 }
 </script>
 <style scoped lang="less">
@@ -189,11 +156,18 @@ export default {
 .title {
   width: 100%;
   padding: 20px;
+  display: flex;
+  justify-content: space-between;
   box-sizing: border-box;
   .left {
     .left_title {
       font-size: 32px;
       font-weight: 700;
+    }
+  }
+  .right {
+    .right_btn {
+      padding: 2px 30px;
     }
   }
 }
@@ -214,7 +188,7 @@ export default {
     .bgTitle::before {
       content: '..';
       width: 20px;
-      background: linear-gradient(0deg, #271a80, #3542b1);
+      background: linear-gradient(0deg, #a977f2, #3542b1);
       height: 100%;
       border-radius: 5px;
       margin-right: 6px;

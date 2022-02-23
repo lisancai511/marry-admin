@@ -12,15 +12,23 @@ const routes = [
     name: "home",
     component: () => import("@/views/login"),
     meta: {
-      title: "登录",
+      title: "人海茫茫",
     },
   },
   {
     path: "/home/detail",
-    name: "home",
+    name: "detail",
     component: () => import("@/views/detail"),
     meta: {
-      title: "详情",
+      title: "后来遇见她",
+    },
+  },
+  {
+    path: "/home/openVip",
+    name: "openVip",
+    component: () => import("@/views/openVip"),
+    meta: {
+      title: "后来遇见她",
     },
   },
 ];

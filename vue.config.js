@@ -22,11 +22,10 @@ module.exports = {
     proxy: {
       //配置跨域
       "/api": {
-        // target: "http://machuxin.free.idcfengye.com/zapi",//马楚欣
-        target: "https://i3.hnzwfw.gov.cn/zapi", //正式
+        target: "http://127.0.0.1:9527", //正式
         changOrigin: true,
         ws: true,
-        pathRewrite: { "^/api": "" },
+        pathRewrite: { "^/api": "/api" },
       },
     },
   },

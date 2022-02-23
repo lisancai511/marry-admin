@@ -11,7 +11,7 @@ import axios from "axios";
 // import router from "@/router";
 const baseURL =
   process.env.NODE_ENV === "development"
-    ? "http://192.168.253.1:9898/fever-treatment-api"
+    ? "/api"
     : "https://i2.hnzwfw.gov.cn/fever-treatment-api";
 const requests = axios.create({
   baseURL,

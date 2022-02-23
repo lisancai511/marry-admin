@@ -9,5 +9,8 @@
 import router from "./router";
 import setDocumentTitle from "@/utils/domUtil";
 router.beforeEach(async (to, from, next) => {
+  to.meta &&
+    typeof to.meta.title !== "undefined" &&
+    setDocumentTitle(to.meta.title);
   next();
 });

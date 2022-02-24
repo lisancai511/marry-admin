@@ -84,7 +84,7 @@
         </div>
       </div>
     </div>
-    <div class="zhanwei"></div>
+
     <div class="footer">
       <van-button class="btn"
                   color="linear-gradient(0deg, #8170F2, #A977F2)"
@@ -92,6 +92,7 @@
                   round
                   size="large">获取微信</van-button>
     </div>
+    <div class="zhanwei"></div>
   </div>
 </template>
 <script>
@@ -135,10 +136,10 @@ export default {
 }
 .logo {
   background-image: url('~@/assets/title.jpg');
-  width: 100%;
-  height: 200px;
   background-size: 100% 100%;
   background-repeat: no-repeat;
+  width: 100%;
+  height: 200px;
 }
 .photo {
   padding: 10px;
@@ -219,10 +220,10 @@ export default {
   background: #f7f8fa;
 }
 .footer {
-  position: fixed;
+  // position: fixed;
   height: 140px;
-  bottom: 0;
-  background: #fff;
+  // bottom: 0;
+  background: #f7f8fa;
   width: 100%;
   display: flex;
   justify-content: center;

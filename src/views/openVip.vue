@@ -47,11 +47,15 @@
             </div>
           </van-col>
         </van-row>
+        <div class="footer">
+          <van-button class="btn"
+                      color="linear-gradient(to bottom right, #d3b581, #e5d0b1)"
+                      round
+                      block
+                      type="primary">确认开通</van-button>
+        </div>
         <div class="note">本平台只是为用户有偿提供微信联系方式（VIP会员每日获取上限次数为5次），不保证用户的完全真实性，请仔细阅读协议，慎重支付。若用户已经支付平台服务费用不予退回</div>
 
-        <div>
-
-        </div>
       </div>
     </van-cell-group>
   </div>
@@ -148,5 +152,15 @@ export default {
   font-size: 12px;
   line-height: 28px;
   color: #dcdee0;
+}
+.footer {
+  width: 100%;
+  margin: 20px 0 20px 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  .btn {
+    width: 60%;
+  }
 }
 </style>

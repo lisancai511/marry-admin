@@ -16,6 +16,14 @@ const routes = [
     },
   },
   {
+    path: "/home/search",
+    name: "search",
+    component: () => import("@/views/search"),
+    meta: {
+      title: "搜索",
+    },
+  },
+  {
     path: "/home/detail",
     name: "detail",
     component: () => import("@/views/detail"),
@@ -29,6 +37,22 @@ const routes = [
     component: () => import("@/views/openVip"),
     meta: {
       title: "后来遇见她",
+    },
+  },
+  {
+    path: "/home/mine",
+    name: "mine",
+    component: () => import("@/views/mine"),
+    meta: {
+      title: "我的",
+    },
+  },
+  {
+    path: "/home/collection",
+    name: "mine",
+    component: () => import("@/views/collection"),
+    meta: {
+      title: "我的收藏",
     },
   },
 ];

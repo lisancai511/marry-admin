@@ -39,7 +39,7 @@
   </div>
 </template>
 <script>
-import { getUserList } from '@/api/index'
+import { getUserList, getAccessToken } from '@/api/index'
 export default {
   name: 'login',
   data() {
@@ -67,6 +67,8 @@ export default {
     async getData() {
       let res = await getUserList(this.filter)
       this.dataList = [...this.dataList, ...res.data.data]
+      let userInfo = await getAccessToken()
+      console.log(userInfo, 711)
     },
   },
 }

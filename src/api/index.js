@@ -21,3 +21,10 @@ export function getUserDetail(id) {
     method: "get",
   });
 }
+
+export function getAccessToken() {
+  return request({
+    url: `/getAccessToken`,
+    method: "get",
+  });
+}
